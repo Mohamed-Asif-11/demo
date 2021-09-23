@@ -1,0 +1,129 @@
+/*const element=<h1>Hello, World!</h1>
+ReactDOM.render(element,document.getElementById('root'));*/
+
+/*function tick(){
+  const element = (
+    <div>
+      <h1>This is the new creation</h1>
+      <h2>Time is {new Date().toLocaleTimeString()}</h2>
+      </div>
+  )
+  ReactDOM.render(element,document.getElementById('root'));
+}
+setInterval(tick,1000);*/
+
+/*function Welcome(props)
+{
+  return <h1>this is function {props.name}</h1>
+}
+
+const element=<Welcome name="example" />
+ReactDOM.render(element,document.getElementById('root'));*/
+
+/*function Welcome(props)
+{
+  return <h1>this is the {props.name} example</h1>;
+}
+
+function Don()
+{
+  return(
+    <div>
+      <Welcome name="first" />
+      <Welcome name="second" />
+      <Welcome name="third" />
+      <Welcome name="fourth" />
+    </div>
+  );
+}
+ReactDOM.render(<Don />,document.getElementById('root'));*/
+
+/*function Clock(props)
+{
+  return(
+    <div>
+    <h1>Hello, World</h1>
+    <h2>This is clock and time is {props.date.toLocaleTimeString()}</h2>
+    </div>
+  );
+}
+function tick()
+{
+  ReactDOM.render(<Clock date= {new Date()}/>,document.getElementById('root'));
+}
+setInterval(tick,1000);*/
+
+/*class Clock extends React.Component
+{
+  constructor(props){
+    super(props);
+    this.state={date: new Date()};
+  }
+  
+  render()
+  {
+    return(
+      <div>
+      <h1>Hello, World</h1>
+      <h2>This is clock and time is {this.state.date.toLocaleTimeString()}</h2>
+      </div>
+    );
+  }
+}
+ReactDOM.render(
+  <Clock />,document.getElementById('root')
+);*/
+
+class Clock extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={date: new Date()};
+  }
+  componenetDidMount(){
+    this.timerID=setInterval(
+      ()=>this.tick(),5000
+    )
+  }
+  componentWillUnmount(){
+    clearInterval(this.timerID);
+  }
+  tick(){
+    this.setState(
+      {date: new Date()}
+    );
+  }
+  render()
+  {
+    return(
+      <div>
+      <h1>hello everyone</h1>
+      <h2>the time is {this.state.date.toLocaleTimeString()}</h2>
+      </div>
+    )  
+  }
+}
+ReactDOM.render(
+  <Clock />,document.getElementById('root')
+);
+
+class Toggle extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={isToggleOn: false};
+    this.handleClick=this.handleClick.bind(this);
+  }
+  handleClick()
+  {
+    this.setState(prevState=>
+      ({isToggleOn:!prevState.isToggleOn}));
+  }
+  render()
+  {
+    return(
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn? 'ON' : 'OFF'}
+        </button>
+    );
+  }
+}
+ReactDOM.render(<Toggle />,document.getElementById('root'));
